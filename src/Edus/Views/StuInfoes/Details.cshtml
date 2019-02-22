@@ -1,0 +1,34 @@
+﻿@model EduAndStuInfo
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Location = "/StuInfoes/Index?page=" + ViewBag.pageNum;
+}
+
+<div class="IndexBoder">
+    <div style="border: 0" class="panel panel-default">
+        <div class="panel-body">
+            @Html.Raw(@Model.Content)
+        </div>
+        <div class="panel-footer">
+            编辑: @Model.Author
+            <br />
+            发布日期: @Model.CreateTime
+            @if (ViewBag.front != null)
+            {
+                <br /><br />
+                <a class="fa fa-mail-reply-all" href="/StuInfoes/Details/@ViewBag.front.Id"> 上一篇：@ViewBag.front.Title</a>
+            }
+            @if (ViewBag.behind != null)
+            {
+                <br />
+                if (ViewBag.front == null)
+                {
+                    <br />
+                }
+                <a class="fa fa-mail-reply-all" href="/StuInfoes/Details/@ViewBag.behind.Id"> 下一篇：@ViewBag.behind.Title</a>
+            }
+        </div>
+    </div>
+</div>
+@Styles.Render("~/CSS/StuInfoEduInfoCouInfoDetail")

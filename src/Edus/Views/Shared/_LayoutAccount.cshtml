@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel" style="margin-top:5em;">
+                    <div style="text-align:center; margin-top:5em;">
+                        <img src="~/Content/img/sicauLogo.png" style="height: 65%; width: 65%;" />
+                    </div>
+                    <div class="panel panel-default" style="margin-top:1em;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">@ViewBag.Title</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            @RenderBody()
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p style="text-align: center; margin-bottom:5em; clear: both">
+        Copyright (C) 2016-@DateTime.Now.Year <a href="http://www.ydath.cn/" target="_blank">DepingDu</a>. All Rights Reserved
+        <br>
+        <a href="http://www.miitbeian.gov.cn" target="_blank">蜀ICP备16013628号</a>
+    </p>
+    @* 
+        因为这几张账号相关的页面是很重要的，但是为了用户体验，综合考虑还是用JQuery异步提交，所以很多处理逻辑就会暴露在用户面前
+        为了尽量保证网站安全，所以这里调试和发布的时候用的JS不一样，发布版本中将逻辑处理的注释删掉了
+        因为js页面的注释是可以看到的，但是这里的注释是看不到的。
+    *@
+    @if (ViewBag.LayoutIndex == 0)
+    {
+        @Scripts.Render("~/Scripts/DubugAccount")
+    }
+    else
+    {
+        @Scripts.Render("~/Scripts/Account")
+    }
+    @Styles.Render("~/CSS/Account")
+    @RenderSection("dialog", required: false)
+</body>
+</html>

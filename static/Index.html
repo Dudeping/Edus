@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <style type="text/css">
+        /*使面板不贴在页面边上*/
+        .panel{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        /*鼠标悬停在面板上有一定的效果*/
+        .myMB:hover{
+            cursor: pointer;
+            background-color: #fcf8e3;
+        }
+    </style>
+</head>
+<body>
+    <div style="border: 0" class="panel panel-default">
+        <!--退出系统-->
+        <form>
+            <button type="button" class="btn btn-default" onclick="location.href = 'Index.html'">主页</button>
+            <button type="button" onclick="location.href = 'Login.html';" class="btn btn-outline btn-success" style="float: right; border: 0">欢迎您，杜德平！点此安全退出<i class="fa fa-sign-out fa-fw"></i> </button>
+        </form>
+    </div>
+    <!--标题-->
+    <div style="border: 0" class="panel panel-default">
+        <div class="panel-body">
+            <div style="text-align: center; font-size: 40px">四川农业大学教务管理系统</div>
+        </div>
+    </div>
+    <!--招生信息管理面板-->
+    <div class="panel panel-default myMB" onclick="location.href = '招生信息管理.html'">
+        <div class="panel-heading">
+           招生信息管理
+        </div>
+        <div class="panel-body">
+            点击这里可以进行招生信息的查看、发布、编辑和删除。
+        </div>
+    </div>
+    <!--教务信息管理面板-->
+    <div class="panel panel-default myMB" onclick="location.href = '教务信息管理.html'">
+        <div class="panel-heading">
+            教务信息管理
+        </div>
+        <div class="panel-body">
+            点击这里可以进行教务信息的查看、发布、编辑和删除。
+        </div>
+    </div>
+    <!--学生信息管理面板-->
+    <div class="panel panel-default myMB"  onclick="location.href = '学生信息管理.html'">
+        <div class="panel-heading">
+            学生信息管理
+        </div>
+        <div class="panel-body">
+            点击这里可以进行学生信息的查看、添加、编辑和删除。
+        </div>
+    </div>
+    <!--教师信息管理面板-->
+    <div class="panel panel-default myMB" onclick="location.href = '教师信息管理.html'">
+        <div class="panel-heading">
+            教师信息管理
+        </div>
+        <div class="panel-body">
+            点击这里可以进行教师信息的查看、添加、编辑和删除。
+        </div>
+    </div>
+    <!--课程信息管理面板-->
+    <div class="panel panel-default myMB" onclick="location.href = '课程信息管理.html'">
+        <div class="panel-heading">
+            课程信息管理
+        </div>
+        <div class="panel-body">
+            点击这里可以进行课程信息的查看、添加、编辑和删除。
+        </div>
+    </div>
+    <!--管理员信息-->
+    <div class="panel panel-default myMB" onclick="location.href = '管理员信息.html'">
+        <div class="panel-heading">
+            管理员信息管理
+        </div>
+        <div class="panel-body">
+            点击这里可以进行管理员信息的查看、添加、删除。
+        </div>
+    </div>
+    <!--退出系统面板-->
+    <div class="panel panel-default myMB" onclick="location.href = 'login.html'">
+        <div class="panel-heading">
+            退出教务系统
+        </div>
+        <div class="panel-body">
+            点击这里安全退出教务系统！
+        </div>
+    </div>
+
+    <p style="text-align: center; margin-bottom:5em; clear: both">
+        Copyright (C) 2016-2016 <a href="http://www.ydath.cn/" target="_blank">第七组</a>. All Rights Reserved
+        <br>
+        <a href="http://www.miitbeian.gov.cn" target="_blank">蜀ICP备16013628号</a>
+    </p>
+</body>
+</html>

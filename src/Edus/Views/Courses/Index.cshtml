@@ -1,0 +1,114 @@
+﻿@model IPagedList<Course>
+@{
+    ViewBag.Title = "课程信息管理";
+    ViewBag.Location = "/";
+}
+    
+<div class="IndexBoder">
+    <div class="col-xs-12" style="padding:0">
+        <div class="col-xs-6" style="padding:0">
+            @*搜索*@
+            <form action="@Url.Action("Index")" method="get" data-course-ajax="true" data-course-target="#CourseList">
+                <div class="form-group input-group">
+                    <input type="text" name="searchStr" placeholder="输入课号或课名搜索" class="form-control" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-6" style="padding:0 0 0 10px">
+            @*新建按钮*@
+            <button type="button" class="btn btn-outline btn-success" data-toggle="modal" id="AddCourseBtn" data-target="#myModal">
+                添加
+            </button>
+            @*弹出的新建模态对话框*@
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content animated bounceInRight">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                            </button>
+                            <h4 class="modal-title">添加课程信息</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            @using (Html.BeginForm("Create", "Courses", FormMethod.Post, new { role = "form", id = "addCourse" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group"><label>课号</label> <input id="AddCouNo" type="text" placeholder="请输入课程课号" class="form-control" value=""></div>
+                                <div class="form-group"><label>课名</label> <input id="AddCouName" type="text" placeholder="请输入课程课名" class="form-control" value="" /></div>
+                                <div class="form-group"><label>学分</label> <input id="AddCouScore" type="text" placeholder="请输入课程学分" class="form-control" value=""></div>
+                                <div class="form-group"><label>任课教师(键入教师工号,多名教师以#号分割)</label> <input id="AddCouTeacher" type="text" placeholder="请输入课程任课教师" class="form-control" /></div>
+                                <div class="form-group"><label>上课地点</label> <input id="AddCouLocation" type="text" placeholder="请输入课程上课地点" class="form-control" value=""></div>
+                                <div class="form-group"><label>计划人数</label> <input id="AddCouPlanNum" type="text" placeholder="请输入课程计划人数" class="form-control" value="" /></div>
+                            }
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal" id="AddCourseClose">关闭</button>
+                            <button type="submit" class="btn btn-primary" onclick="AddCourse(); return false;">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*批量导入*@
+            <button type="button" class="btn btn-outline btn-success" data-toggle="modal" id="TAddCourseBtn" data-target="#myModalT">
+                批量导入
+            </button>
+            @*弹出的批量导入模态对话框*@
+            <div class="modal fade" id="myModalT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content animated bounceInRight">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                            </button>
+                            <h4 class="modal-title">批量导入课程</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            批量导入是为了使操作更加方便，所以，为了减少错误的发生，请务必遵守以下约定。<br />
+                            1、文件必须为txt文件<br />
+                            2、文件大小不能超过2M，如果超过，请将文件分割，分批上传<br />
+                            3、文件格式请参阅下图<br />
+                            文件格式<br />
+                            <img src="~/Content/img/courseModel.JPG" />
+                            <br />文件模板<br />
+                            <img src="~/Content/img/courseData.JPG" />
+                            <br />
+                            @using (Html.BeginForm("TCreateCourse", "Courses", FormMethod.Post, new { role = "form", id = "TaddCourse", enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i> 
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-default btn-file">
+                                        <span class="fileinput-new">选择文件</span>
+                                        <span class="fileinput-exists">换一个</span>
+                                        <input type="file" id="courseUpFile">
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">移除</a>
+                                </div>
+                                <img id="tempimg" dynsrc="" src="" style="display:none" />
+                            }
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal" id="TAddCourseClose">关闭</button>
+                            <button type="submit" class="btn btn-primary" onclick="TAddCourse(); return false;">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    @Html.Partial("_PartialCourse", Model)
+</div>
+@Styles.Render("~/CSS/CouAdminManageStudent")
+@Scripts.Render("~/Scripts/CouAdminManageStudent")

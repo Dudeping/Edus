@@ -1,0 +1,112 @@
+﻿@model IPagedList<EduAndStuInfo>
+
+<div id="StuInfoList">
+    @*表格*@
+    <table class="table table-bordered table-hover" style="margin:0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>招生信息标题</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr style="text-align:center; color:red"><td colspan="3">暂无任何数据</td></tr>
+            }
+            @{ int i = 2;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(@item.Id)</td>
+                    <td><a href="/StuInfoes/Details/@item.Id">@item.Title</a></td>
+                    <td>
+                        @*编辑按钮*@
+                        <button type="button" style="margin-right:5px;" class="btn btn-outline btn-primary  btn-xs floatFormLeft" data-toggle="modal" data-target="#myModal_@item.Id" id="EditStuIfo_@item.Id">编辑</button>
+                        @*弹出的修改模态对话框*@
+                        <div class="modal fade" id="myModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated bounceInRight">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                        </button>
+                                        <h4 class="modal-title">修改招生信息</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        @using (Html.BeginForm("Edit", "StuInfoes", FormMethod.Post, new { role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div class="form-group"><label>标题</label> <input id="EditStuInfoTitle_@item.Id" type="text" placeholder="请输入招生信息标题" class="form-control" value="@item.Title" /></div>
+                                            <div class="form-group">
+                                                <label>内容</label><textarea id="EditStuInfoText_@item.Id" placeholder="请输入招生信息内容" class="form-control" rows="15">@item.Content</textarea>
+                                            </div>
+                                            @*编辑器网站：http://simditor.tower.im/*@
+                                            <script>
+                                                $(function () {
+                                                    $(function () {
+                                                        var $preview, editor, mobileToolbar, toolbar;
+                                                        Simditor.locale = 'en-US';
+                                                        //配置电脑图标
+                                                        toolbar = ['title', 'bold', 'color', 'ol', 'blockquote', 'link', 'image', 'hr', 'indent', 'outdent', 'alignment'];
+                                                        //配置手机图标
+                                                        mobileToolbar = ['title', "bold", "color", "ol", 'blockquote', 'link', 'hr'];
+                                                        if (mobilecheck()) {
+                                                            toolbar = mobileToolbar;
+                                                        }
+                                                        editor = new Simditor({
+                                                            textarea: $('#EditStuInfoText_@item.Id'),
+                                                            toolbar: toolbar,
+                                                            toolbarFloat: true,
+                                                            pasteImage: true,
+                                                            defaultImage: 'assets/images/image.png',
+                                                            upload: location.search === '?upload' ? {
+                                                                url: '/upload'
+                                                            } : false
+                                                        });
+                                                        $preview = $('#preview');
+                                                        if ($preview.length > 0) {
+                                                            return editor.on('valuechanged', function (e) {
+                                                                return $preview.html(editor.getValue());
+                                                            });
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                          }
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal" id="EditStuInfoClose_@item.Id">关闭</button>
+                                        <button type="submit" class="btn btn-primary" onclick="EditStuInfo('@item.Id', '@ViewBag.hidPage', @(i++)); return false;">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*删除按钮*@
+                        @using (Html.BeginForm("Delete", "StuInfoes", FormMethod.Post, new { role = "form", @class = "floatFormLeft" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="button" class="btn btn-outline btn-warning  btn-xs" onclick="DeleteStuInfo('@item.Id', '@ViewBag.hidPage', @(i++))">删除</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        
+    @if (Model.Count() > 0)
+    {
+        @*异步分页*@
+        <div class="pagedList" data-stuInfo-target="#StuInfoList">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)@*分页只显示5张页面，为了照顾手机端*@
+        </div>
+    }
+    else
+    {
+        <br />
+        <br />
+    }
+</div>

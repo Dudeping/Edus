@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel" style="margin-top:5em;">
+                    <div class="panel @ViewBag.panelType" style="margin-top:1em;">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">@ViewBag.title</h1>
+                        </div>
+                        <div class="panel-body">
+                            @*为了简化页面，将相同的几张页面共用这个模板*@
+                            @if (ViewBag.body == "Login")
+                            {
+                                <h5>重置密码成功, @Html.ActionLink("单击此处登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) !</h5>
+                            }
+                            else
+                            {
+                                @Html.Raw(@ViewBag.body)
+                            }
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

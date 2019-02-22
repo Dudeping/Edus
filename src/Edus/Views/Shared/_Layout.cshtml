@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        /*退出系统表单浮在右上角*/
+        .floatFormRight{
+            float:right;
+        }
+        .floatFormLeft{
+            float:left;
+        }
+        /*使面板不贴在页面边上*/
+        .panel {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .IndexBoder{
+            margin-left: 10px; 
+            margin-right: 10px
+        }
+    </style>
+</head>
+<body class="body-content">
+    @*返回上一级页面和退出系统*@
+    <div style="border: 0; margin-bottom:0;overflow:auto" class="panel panel-default">
+        @{ 
+            string location_ = ViewBag.Location;
+        }
+        @*如果含有？的链接，统一转化为表单，解决了招生信息和教务信息的地址栏带参数对刷新带来的麻烦*@
+        @if(location_.Contains("?"))
+        {
+            <form action="@location_.Split(new char[] { '?' }, StringSplitOptions.RemoveEmptyEntries)[0]" method="post" class="floatFormLeft" role="form">
+                <input type="hidden" name="@location_.Split(new char[] { '?'}, StringSplitOptions.RemoveEmptyEntries)[1].Split(new char[] { '='}, StringSplitOptions.RemoveEmptyEntries)[0]" value="@location_.Split(new char[] { '?'}, StringSplitOptions.RemoveEmptyEntries)[1].Split(new char[] { '='}, StringSplitOptions.RemoveEmptyEntries)[1]"/>
+                <button type="submit" class="btn btn-default" >返回</button>
+            </form>
+        }
+        else
+        {   /*如果是首页，则按钮应显示首页*/
+            <button type="button" class="btn btn-default" onclick="location.href = '@ViewBag.Location';">@(ViewBag.Location == "/Home" ? "首页" : "返回")</button>
+        }
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "floatFormRight" }))
+            {
+                @Html.AntiForgeryToken()
+                <button type="button" onclick="javascript: document.getElementById('logoutForm').submit()" class="btn btn-outline btn-success" style="border: 0">欢迎您，@(User.IsInRole("Administrator") ? "Administrator" : "管理员")！点此安全退出<i class="fa fa-sign-out fa-fw"></i> </button>
+            }
+        }
+    </div>
+
+    @*分隔线*@
+    <hr style="margin:0" />
+
+    @*标题*@
+    <div style="border: 0; margin-bottom:0; clear:both" class="panel panel-default">
+        <div style="padding:15px;text-align: center; font-size: 40px">@ViewBag.Title</div>
+    </div>
+
+    @*分隔线*@
+    <hr style="margin:0 0 10px 0" />
+
+    @RenderBody()
+
+    @*分隔线*@
+    <hr style="margin:0 0 10px 0" />
+
+    <p style="text-align: center; clear: both">
+        Copyright (C) 2016-@DateTime.Now.Year <a href="http://www.ydath.cn/" target="_blank">DepingDu</a>. All Rights Reserved
+        <br>
+        <a href="http://www.miitbeian.gov.cn" target="_blank">蜀ICP备16013628号</a>
+    </p>
+</body>
+</html>

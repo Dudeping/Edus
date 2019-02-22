@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AdminModel>
+@*表格*@
+
+<div id="AdminList">
+    <table class="table table-bordered table-hover" style="margin:0 0 10px 0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>分管模块</th>
+                <th> 删除</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr style="text-align:center; color:red"><td colspan="5">暂无分块管理员</td></tr>
+            }
+            else
+            {
+                int i = 1; @*从一开始是因为还有一个退出按钮*@
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@item.Email</td>
+                        <td>**********</td>
+                        <td>@item.AdminType</td>
+                        <td>
+                            @*删除按钮*@
+
+                            @using (Html.BeginForm("Delete", "Account", FormMethod.Post, new { role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="button" class="btn btn-outline btn-warning  btn-xs" onclick="DeleteAdmin('@item.Id', '@(i++)')">删除</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    ViewBag.Title = "欢迎登录教务管理系统";
+}
+
+@section dialog{
+    <link href="~/Content/custom/dialog.css" rel="stylesheet" />
+    <script src="~/Scripts/custom/dialog.js"></script>
+    <script>
+            $(function () {
+                $("#submitContact").click(function () {
+                    $(this).DialogShow({
+                        'id': 'dialog_contact',
+                        'dialogFx': '1',
+                    });
+                });
+                $(".dialog__overlay").click(function () {
+                    $(this).DialogShow({
+                        'id': 'dialog_contact',
+                        'dialogFx': '0',
+                    });
+                });
+            })
+    </script>
+    <div class="header">
+    <div class="explain">
+        <div class="btn">
+            <div id="dialog_contact" class="dialog">
+                <div class="dialog__overlay"></div>
+                <div class="dialog__content">
+                    <h2>
+                        账号：2512303162@qq.com<br />
+                        密码：Edu.2016
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+}
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="resultUrl" value="@ViewBag.ReturnUrl" />
+    <fieldset>
+        <div class="form-group">
+            <input class="form-control" id="Email" name="Email" placeholder="邮箱" type="email" value="" />
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="passWord" name="passWord" placeholder="密码" type="password" value="" />
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="true"> 记住我?
+                </label>
+            </div>
+        </div>
+        <button id="login" type="submit" class="btn btn-lg btn-success btn-block" onclick="Login(); return false;">登录</button>
+        <div>
+            <table style="width:100%">
+                <tbody>
+                    <tr>
+                        <th style="font-weight:normal;">
+                            <div style="text-align:left; margin-top:1em;">
+                                <a id="submitContact" href="#" onclick="return false;" class="video"><i class="fa fa-angle-left"></i> 获取体验账号</a>
+                            </div>
+                        </th>
+                        <th style="font-weight:normal;">
+                            <div style="text-align:right; margin-top:1em;">
+                                <a href="@Url.Action("ForgotPassword","Account")">忘记密码 <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+}

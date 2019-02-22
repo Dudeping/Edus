@@ -1,0 +1,83 @@
+﻿@model IPagedList<Course>
+
+<div id="CourseList">
+    @*表格*@
+    <table class="table table-bordered table-hover" style="margin:0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>课号</th>
+                <th>课名</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model.Count() == 0)
+            {
+                <tr style="text-align:center; color:red"><td colspan="4">暂无任何数据</td></tr>
+            }
+            @{ int i = 3;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td><a href="/Courses/Details/@item.Id">@item.CNo</a></td>
+                    <td><a href="/Courses/Details/@item.Id">@item.CName</a></td>
+                    <td>
+                        @*编辑按钮*@
+                        <button type="button" class="btn btn-outline btn-primary  btn-xs floatFormLeft" style="margin-right:5px" data-toggle="modal" id="EditCourse_@item.Id" data-target="#myModal_@item.Id">编辑</button>
+                        @*弹出的修改模态对话框*@
+                        <div class="modal fade" id="myModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated bounceInRight">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                        </button>
+                                        <h4 class="modal-title">修改招生信息</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        @using (Html.BeginForm("Edit", "Courses", FormMethod.Post, new { role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div class="form-group"><label>课号</label> <input id="EditCouNo_@item.Id" type="text" placeholder="请输入课程课号" class="form-control" value="@item.CNo" readonly="readonly"></div>
+                                            <div class="form-group"><label>课名</label> <input id="EditCouName_@item.Id" type="text" placeholder="请输入课程课名" class="form-control" value="@item.CName" /></div>
+                                            <div class="form-group"><label>学分</label> <input id="EditCouScore_@item.Id" type="text" placeholder="请输入课程学分" class="form-control" value="@item.Score"></div>
+                                            <div class="form-group"><label>任课教师(键入教师工号, 多名教师以#号分割)</label> <input id="EditCouTeacher_@item.Id" type="text" placeholder="请输入课程任课教师" class="form-control" value="@item.TNo" /></div>
+                                            <div class="form-group"><label>上课地点</label> <input id="EditCouLocation_@item.Id" type="text" placeholder="请输入课程上课地点" class="form-control" value="@item.Location"></div>
+                                            <div class="form-group"><label>计划人数</label> <input id="EditCouPlanNum_@item.Id" type="text" placeholder="请输入课程计划人数" class="form-control" value="@item.PlanNum" /></div>
+                                        }
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal" id="EditCourseClose_@item.Id">关闭</button>
+                                        <button type="submit" class="btn btn-primary" onclick="EditCourse('@item.Id', '@ViewBag.hidPage', @(i++)); return false;">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*删除按钮*@
+                        @using (Html.BeginForm("Delete", "Course", FormMethod.Post, new { role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="button" class="btn btn-outline btn-warning  btn-xs" onclick="DeleteCourse('@item.Id', '@ViewBag.hidPage', @(i++))">删除</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Model.Count() > 0)
+    {
+        @*分页*@
+        <div class="pagedList" data-course-target="#CourseList">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+        </div>
+    }
+    else
+    {
+        <br />
+        <br />
+    }
+</div>

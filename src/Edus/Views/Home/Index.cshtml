@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "四川农业大学教务管理系统";
+    ViewBag.Location = "/Home";
+}
+
+@Styles.Render("~/CSS/Home")
+<style type="text/css">
+    /*鼠标悬停在面板上有一定的效果*/
+    .myMB:hover {
+        cursor: pointer;
+        background-color: #fcf8e3;
+    }
+</style>
+    @*招生信息管理面板*@
+    @if (User.IsInRole("招生信息管理") || User.IsInRole("Administrator"))
+    {
+        <div class="panel panel-default myMB" onclick="location.href = '/StuInfoes'">
+            <div class="panel-heading">
+                招生信息管理
+            </div>
+            <div class="panel-body">
+                点击这里可以进行招生信息的查看、发布、编辑和删除。
+            </div>
+        </div>
+    }
+    @*教务信息管理面板*@
+    @if (User.IsInRole("教务信息管理") || User.IsInRole("Administrator"))
+    {
+        <div class="panel panel-default myMB" onclick="location.href = '/EduInfoes'">
+            <div class="panel-heading">
+                教务信息管理
+            </div>
+            <div class="panel-body">
+                点击这里可以进行教务信息的查看、发布、编辑和删除。
+            </div>
+        </div>
+    }
+    @*学生信息管理面板*@
+    @if (User.IsInRole("学生信息管理") || User.IsInRole("Administrator"))
+    {
+        <div class="panel panel-default myMB" onclick="location.href = '/Students'">
+            <div class="panel-heading">
+                学生信息管理
+            </div>
+            <div class="panel-body">
+                点击这里可以进行学生信息的查看、添加、编辑和删除。
+            </div>
+        </div>
+    }
+    @*教师信息管理面板*@
+    @if (User.IsInRole("教师信息管理") || User.IsInRole("Administrator"))
+    {
+        <div class="panel panel-default myMB" onclick="location.href = '/Teachers'">
+            <div class="panel-heading">
+                教师信息管理
+            </div>
+            <div class="panel-body">
+                点击这里可以进行教师信息的查看、添加、编辑和删除。
+            </div>
+        </div>
+    }
+    @*课程信息管理面板*@
+    @if (User.IsInRole("课程信息管理") || User.IsInRole("Administrator"))
+    {
+        <div class="panel panel-default myMB" onclick="location.href = '/Courses'">
+            <div class="panel-heading">
+                课程信息管理
+            </div>
+            <div class="panel-body">
+                点击这里可以进行课程信息的查看、添加、编辑和删除。
+            </div>
+        </div>
+    }
+    @*管理员信息*@
+    @if (User.IsInRole("Administrator"))
+    {
+        <div class="panel panel-default myMB" onclick="location.href = '/Account'">
+            <div class="panel-heading">
+                管理员信息管理
+            </div>
+            <div class="panel-body">
+                点击这里可以进行管理员信息的查看、添加、删除。
+            </div>
+        </div>
+    }
+    @*修改密码*@
+    <div class="panel panel-default myMB" onclick="location.href = '/Account/ChangePassword'">
+        <div class="panel-heading">
+            修改密码
+        </div>
+        <div class="panel-body">
+            点击这里可以进行账号密码的修改。
+        </div>
+    </div>
+    @*退出系统面板*@
+    <div class="panel panel-default myMB" onclick="javascript: document.getElementById('logoutForm').submit()">
+        <div class="panel-heading">
+            退出教务系统
+        </div>
+        <div class="panel-body">
+            点击这里安全退出教务系统！
+        </div>
+    </div>

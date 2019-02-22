@@ -1,0 +1,60 @@
+﻿@model Course
+
+@{
+    ViewBag.Title = "课程信息详情";
+    ViewBag.Location = "/Courses/Index?page=" + ViewBag.pageNum;
+}
+    <div class="IndexBoder">
+        <div style="border: 0; margin-bottom:0" class="panel panel-default">
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>类型</th>
+                            <th>详情</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-bottom:1px solid #ccc">
+                        <tr>
+                            <td>1</td>
+                            <td>课号</td>
+                            <td>@Model.CNo</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>课名</td>
+                            <td>@Model.CName</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>学分</td>
+                            <td>@Model.Score</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>任课教师</td>
+                            <td>@Model.TNo</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>上课地点</td>
+                            <td>@Model.Location</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>计划人数</td>
+                            <td>@Model.PlanNum</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>已选人数</td>
+                            <td>@Model.SelectNum</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" onclick="location.href = '/Courses/ManageStudent/@Model.Id'" class="btn btn-outline btn-success">管理选课学生</button>
+            </div>
+        </div>
+    </div>
+@Styles.Render("~/CSS/StuInfoEduInfoCouInfoDetail")

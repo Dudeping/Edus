@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>课程信息管理</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <link rel="stylesheet" href="css/sweetalert.css"/>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+</head>
+<body>
+<!--返回上一张页面-->
+<div style="border: 0" class="panel panel-default">
+    <button type="button" class="btn btn-default" onclick="location.href = 'Index.html';">返回</button>
+    <button type="button" onclick="location.href = 'Login.html';" class="btn btn-outline btn-success" style="float: right; border: 0">欢迎您，杜德平！点此安全退出<i class="fa fa-sign-out fa-fw"></i> </button>
+</div>
+<!--标题-->
+<div style="border: 0" class="panel panel-default">
+    <div class="panel-body">
+        <div style="text-align: center; font-size: 40px">课程信息管理</div>
+    </div>
+</div>
+<div  style="margin-left: 10px; margin-right: 10px">
+    <!--搜索-->
+    <form>
+        <div class="form-group input-group col-xs-8">
+            <input type="text" class="form-control" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+        </div>
+    </form>
+    <br/>
+    <!--表格-->
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>课号</th>
+            <th>课名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><a href="课程信息详情.html">001</a></td>
+            <td><a href="课程信息详情.html">高数</a></td>
+            <td>
+                <button type="button" class="btn btn-outline btn-primary  btn-xs" data-toggle="modal" data-target="#myModal1">编辑</button>
+                <!--弹出的修改模态对话框-->
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                </button>
+                                <h4 class="modal-title">修改招生信息</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group"><label>标题</label> <input id="editCNo_id" type="text" placeholder="请输入课程课号" class="form-control" value="001"></div>
+                                    <div class="form-group"><label>内容</label> <input id="editCName_id" type="text" placeholder="请输入课程课名" class="form-control" value="高数"/></div>
+                                    <div class="form-group"><label>学分</label> <input id="editCScore_id" type="text" placeholder="请输入课程学分" class="form-control" value="3.5"></div>
+                                    <div class="form-group"><label>任课教师(键入教师学号，以#开头)</label> <input id="editCTeacher_id" type="text" placeholder="请输入课程任课教师" class="form-control" value="#0800 051213"/></div>
+                                    <div class="form-group"><label>上课地点</label> <input id="editCLocation_id" type="text" placeholder="请输入课程上课地点" class="form-control" value="10-B305"></div>
+                                    <div class="form-group"><label>计划人数</label> <input id="editCPlanNum_id" type="text" placeholder="请输入课程计划人数" class="form-control" value="180"/></div>
+                                </form>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal" id="editClose">关闭</button>
+                                <button type="button" class="btn btn-primary" onclick="EditCourse('id')">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--删除按钮-->
+                <button type="button" class="btn btn-outline btn-warning  btn-xs" onclick="DeleteCourse()">删除</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><a href="课程信息详情.html">002</a></td>
+            <td><a href="课程信息详情.html">离散</a></td>
+            <td>
+                <button type="button" class="btn btn-outline btn-primary  btn-xs">编辑</button>
+                <button type="button" class="btn btn-outline btn-warning  btn-xs">删除</button>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><a href="课程信息详情.html">003</a></td>
+            <td><a href="课程信息详情.html">线代</a></td>
+            <td>
+                <button type="button" class="btn btn-outline btn-primary  btn-xs">编辑</button>
+                <button type="button" class="btn btn-outline btn-warning  btn-xs">删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--新建按钮-->
+    <div>
+        <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#myModal">
+            添加
+        </button>
+        <!--弹出的新建模态对话框-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                        </button>
+                        <h4 class="modal-title">添加课程信息</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group"><label>课号</label> <input id="addCNo" type="text" placeholder="请输入课程课号" class="form-control" value=""></div>
+                            <div class="form-group"><label>内容</label> <input id="addCName" type="text" placeholder="请输入课程课名" class="form-control" value=""/></div>
+                            <div class="form-group"><label>学分</label> <input id="addCScore" type="text" placeholder="请输入课程学分" class="form-control" value=""></div>
+                            <div class="form-group"><label>任课教师(键入教师工号号，以#开头)</label> <input id="addCTeacher" type="text" placeholder="请输入课程任课教师" class="form-control" value=""/></div>
+                            <div class="form-group"><label>上课地点</label> <input id="addCLocation" type="text" placeholder="请输入课程上课地点" class="form-control" value=""></div>
+                            <div class="form-group"><label>计划人数</label> <input id="addCPlanNum" type="text" placeholder="请输入课程计划人数" class="form-control" value=""/></div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal" id="addClose">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="AddCourse()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--分页-->
+        <ul class="pagination pagination-sm" style="float: right">
+            <li class="disabled"><a href="#">&laquo;</a>
+            </li>
+            <li class="active"><a href="#">1</a>
+            </li>
+            <li><a href="#">2</a>
+            </li>
+            <li><a href="#">3</a>
+            </li>
+            <li><a href="#">4</a>
+            </li>
+            <li><a href="#">5</a>
+            </li>
+            <li><a href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<p style="text-align: center; margin-bottom:5em; clear: both">
+    Copyright (C) 2016-2016 <a href="http://www.ydath.cn/" target="_blank">第七组</a>. All Rights Reserved
+    <br>
+    <a href="http://www.miitbeian.gov.cn" target="_blank">蜀ICP备16013628号</a>
+</p>
+</body>
+<script>
+    /*删除*/
+    function DeleteCourse(){
+        swal({
+            title: "您确定要删除这条信息吗",
+            text: "删除后将无法恢复，请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "是的，我要删除！",
+            cancelButtonText: "让我再考虑一下…",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                swal("删除成功！", "您已经永久删除了这条信息。", "success");
+            } else {
+                swal("已取消", "您取消了删除操作！", "error");
+            }
+        });
+    }
+
+    /*编辑*/
+    function EditCourse(id){
+        var cno = document.getElementById('editCNo_id');
+        if(cno.value == ''){
+            swal("提示", "课号不能为空！", "warning");
+            cno.focus();
+            return;
+        }
+        var cName = document.getElementById('editCName_id');
+        if(cName.value == ''){
+            swal("提示", "课名不能为空！", "warning");
+            cName.focus();
+            return;
+        }
+        var score = document.getElementById('editCScore_id');
+        if(score.value == ''){
+            swal("提示", "学分不能为空！", "warning");
+            score.focus();
+            return;
+        }
+        var teacher = document.getElementById('editCTeacher_id');
+        if(teacher.value == ''){
+            swal("提示", "任课教师不能为空！", "warning");
+            teacher.focus();
+            return;
+        }
+        var location = document.getElementById('editCLocation_id');
+        if(location.value == ''){
+            swal("提示", "上课地点不能为空！", "warning");
+            location.focus();
+            return;
+        }
+        var planMum = document.getElementById('editCPlanNum_id');
+        if(planMum.value == ''){
+            swal("提示", "计划人数不能为空！", "warning");
+            planMum.focus();
+            return;
+        }
+
+        /*AJAX*/
+        swal({
+            title:"成功",
+            text:"编辑课程成功！",
+            type:"success"
+        },function(){
+            document.getElementById('editClose').focus();
+            document.getElementById('editClose').click();
+        })
+    }
+
+    /*添加*/
+    function AddCourse(){
+        var cno = document.getElementById('addCNo');
+        if(cno.value == ''){
+            swal("提示", "课号不能为空！", "warning");
+            cno.focus();
+            return;
+        }
+        var cName = document.getElementById('addCName');
+        if(cName.value == ''){
+            swal("提示", "课名不能为空！", "warning");
+            cName.focus();
+            return;
+        }
+        var score = document.getElementById('addCScore');
+        if(score.value == ''){
+            swal("提示", "学分不能为空！", "warning");
+            score.focus();
+            return;
+        }
+        var teacher = document.getElementById('addCTeacher');
+        if(teacher.value == ''){
+            swal("提示", "任课教师不能为空！", "warning");
+            teacher.focus();
+            return;
+        }
+        var location = document.getElementById('addCLocation');
+        if(location.value == ''){
+            swal("提示", "上课地点不能为空！", "warning");
+            location.focus();
+            return;
+        }
+        var planMum = document.getElementById('addCPlanNum');
+        if(planMum.value == ''){
+            swal("提示", "计划人数不能为空！", "warning");
+            planMum.focus();
+            return;
+        }
+
+        /*AJAX*/
+        swal({
+            title:"成功",
+            text:"添加课程成功！",
+            type:"success"
+        },function(){
+            document.getElementById('addClose').focus();
+            document.getElementById('addClose').click();
+        })
+    }
+</script>
+</html>

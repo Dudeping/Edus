@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/sweetalert.css"/>
+    <script src="js/sweetalert.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel" style="margin-top:5em;">
+                <div style="text-align:center; margin-top:5em;">
+                    <img src="img/sicauLogo.png" style="height: 65%; width: 65%;" />
+                </div>
+                <div class="panel panel-default" style="margin-top:1em;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">欢迎登录教务管理系统</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="#" method="post" role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" id="userName" name="userName" placeholder="账号" type="email" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="Password" name="Password" placeholder="密码" type="password" value="" />
+                                </div>
+                                <button type="button" id="login" class="btn btn-lg btn-warning btn-block" onclick="Login()">登录</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Login(){
+        var userName = document.getElementById('userName');
+        if(userName.value == ''){
+            swal("提示", "用户名不能为空！", "warning");
+            userName.focus();
+            return;
+        }
+        var passWord = document.getElementById('Password');
+        if(passWord.value == ''){
+            swal("提示", "用户名不能为空！", "warning");
+            passWord.focus();
+            return;
+        }
+        /*AJAX*/
+        document.getElementById('login').textContent = "登录成功，正在跳转...";
+        setTimeout(function () {
+            location.href = "Index.html";
+        }, 1000);
+    }
+</script>
+
+<p style="text-align: center; margin-bottom:5em;">
+    Copyright (C) 2016-2016 <a href="http://www.ydath.cn/" target="_blank">第七组</a>. All Rights Reserved
+    <br>
+    <a href="http://www.miitbeian.gov.cn" target="_blank">蜀ICP备16013628号</a>
+</p>
+</body>
+</html>
