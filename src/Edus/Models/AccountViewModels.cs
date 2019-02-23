@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace XZJ_BS.Models
+namespace Edus.Models
 {
     public class LoginViewModel
     {

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using XZJ_BS.Models;
+using Edus.Models;
 using PagedList;
 
-namespace XZJ_BS.Controllers
+namespace Edus.Controllers
 {
     [Authorize]
     public class EduInfoesController : Controller

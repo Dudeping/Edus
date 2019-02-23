@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(XZJ_BS.Startup))]
-namespace XZJ_BS
+[assembly: OwinStartupAttribute(typeof(Edus.Startup))]
+namespace Edus
 {
     public partial class Startup
     {

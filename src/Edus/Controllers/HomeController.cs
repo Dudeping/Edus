@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace XZJ_BS.Controllers
+namespace Edus.Controllers
 {
     [Authorize]
     public class HomeController : Controller

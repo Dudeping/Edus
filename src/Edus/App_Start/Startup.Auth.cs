@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using XZJ_BS.Models;
+using Edus.Models;
 
-namespace XZJ_BS
+namespace Edus
 {
     public partial class Startup
     {

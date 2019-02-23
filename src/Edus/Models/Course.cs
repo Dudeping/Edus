@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace XZJ_BS.Models
+namespace Edus.Models
 {
     public class Course
     {

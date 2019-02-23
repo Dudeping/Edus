@@ -8,10 +8,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using XZJ_BS.Models;
+using Edus.Models;
 using System.Collections.Generic;
 
-namespace XZJ_BS.Controllers
+namespace Edus.Controllers
 {
     [Authorize]
     //登录类

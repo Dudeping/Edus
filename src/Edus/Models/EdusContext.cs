@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace XZJ_BS.Models
+namespace Edus.Models
 {
     public class XZJ_BSContext : DbContext
     {
@@ -15,16 +15,16 @@ namespace XZJ_BS.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public XZJ_BSContext() : base("name=XZJ_BSContext")
+        public XZJ_BSContext() : base("name=EdusDB")
         {
         }
 
-        public System.Data.Entity.DbSet<XZJ_BS.Models.Student> Students { get; set; }
+        public System.Data.Entity.DbSet<Edus.Models.Student> Students { get; set; }
 
-        public System.Data.Entity.DbSet<XZJ_BS.Models.Teacher> Teachers { get; set; }
+        public System.Data.Entity.DbSet<Edus.Models.Teacher> Teachers { get; set; }
 
-        public System.Data.Entity.DbSet<XZJ_BS.Models.Course> Courses { get; set; }
+        public System.Data.Entity.DbSet<Edus.Models.Course> Courses { get; set; }
 
-        public System.Data.Entity.DbSet<XZJ_BS.Models.EduAndStuInfo> EduAndStuInfoes { get; set; }
+        public System.Data.Entity.DbSet<Edus.Models.EduAndStuInfo> EduAndStuInfoes { get; set; }
     }
 }

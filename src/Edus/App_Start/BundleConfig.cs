@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace XZJ_BS
+namespace Edus
 {
     public class BundleConfig
     {

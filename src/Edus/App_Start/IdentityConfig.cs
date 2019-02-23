@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using XZJ_BS.Models;
+using Edus.Models;
 
-namespace XZJ_BS
+namespace Edus
 {
     // 定义ApplicationUser类，继承自IdentityUser
     public class ApplicationUser : IdentityUser

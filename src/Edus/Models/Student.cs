@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace XZJ_BS.Models
+namespace Edus.Models
 {
     public class Student
     {

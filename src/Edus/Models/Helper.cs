@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 
-namespace XZJ_BS.Models
+namespace Edus.Models
 {
     // 序列化, 将异步返回的数据序列化
     public static class Json
